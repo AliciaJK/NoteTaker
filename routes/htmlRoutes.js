@@ -13,19 +13,14 @@ module.exports = (app) => {
   // In each of the below cases the user is shown an HTML page of content
 
 
-  // Retrieves a note with specific id
-  router.get("/notes/:id", function (req, res) {
-    // display json for the notes array indices of the provided id
-    res.json(notes[req.params.id]);
-  });
+  // joining router to index html
+  router.get("/", (req, res) => 
+  res.sendFile(path.join(__dirname, "../public/index.html")));
 
-  router.get("/notes/", function (req, res) {
-    // display json for the notes array indices of the provided id
-    res.json(notes[req.params.id]);
-  });
 
-  // If no matching route is found default to home
-  router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
-  });
-};
+  //joining router to notes html
+  router.get('/notes', (req, res) => 
+  res.sendFile(path.join(__dirname, '../public/notes.html')));
+
+
+}
