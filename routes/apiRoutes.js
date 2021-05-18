@@ -3,16 +3,29 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 
 const tableData = require('../db/db.json');
+//connecting router to express
+const router = require('express').Router();
+const fs = require("fs");
+const noteList = JSON.parse(fs.readFileSync("db/db.json"));
+
+
+
+
+router.get('/notes', (req, res) => {
+  const noteList = JSON.parse(fs.readFileSync("db/db.json"));
+  return res.json(noteList);
+});
+
 
 
 // ROUTING
 
 module.exports = (app) => {
 
-  app.get('/api/notes', (req, res) => res.json(tableData));
+  api.get('/api/notes', (req, res) => res.json(tableData));
 
 
-  app.post('/api/notes', (req, res) => {
+  api.post('/api/notes', (req, res) => {
     if (tableData.length < 5) {
       tableData.push(req.body);
       res.json(true);
@@ -23,7 +36,7 @@ module.exports = (app) => {
   });
 
   //delete note
-  app.delete('/api/notes/:id', (req, res) => {
+  api.delete('/api/notes/:id', (req, res) => {
     //finds note by id, then converts the string into a JSON object with the id parameters of the request made
     let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
 
