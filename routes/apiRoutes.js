@@ -21,6 +21,15 @@ module.exports = (app) => {
       res.json(false);
     }
   });
-}
 
+  //delete note
+  app.delete('/api/notes/:id', (req, res) => {
+    //finds note by id, then converts the string into a JSON object with the id parameters of the request made
+    let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
+
+    //Delete object matching the index of the note ID
+    noteList.splice(noteList.indexOf(findNote), 1);
+    res.end("Note was deleted");
+});
+}
 
