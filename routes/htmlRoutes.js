@@ -14,8 +14,15 @@ module.exports = (app) => {
     res.sendFile(path.join(__dirname, '../notes.html'));
   });
 
-  app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '../index.html'));
+  // app.get('/', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../index.html'));
+  // });
+
+
+  // Retrieves a note with specific id
+  app.get("/api/notes/:id", function (req, res) {
+    // display json for the notes array indices of the provided id
+    res.json(notes[req.params.id]);
   });
 
   // If no matching route is found default to home
