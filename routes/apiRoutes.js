@@ -3,7 +3,7 @@
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 
 const tableData = require('../db/db.json');
-// const waitListData = require('../data/waitinglistData');
+
 
 // ROUTING
 
