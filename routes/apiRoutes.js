@@ -22,10 +22,10 @@ router.get('/notes', (req, res) => {
 
 module.exports = (app) => {
 
-  api.get('/api/notes', (req, res) => res.json(tableData));
+  router.get('/api/notes', (req, res) => res.json(tableData));
 
 
-  api.post('/api/notes', (req, res) => {
+  router.post('/api/notes', (req, res) => {
     if (tableData.length < 5) {
       tableData.push(req.body);
       res.json(true);
@@ -36,7 +36,7 @@ module.exports = (app) => {
   });
 
   //delete note
-  api.delete('/api/notes/:id', (req, res) => {
+  router.delete('/api/notes/:id', (req, res) => {
     //finds note by id, then converts the string into a JSON object with the id parameters of the request made
     let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
 
