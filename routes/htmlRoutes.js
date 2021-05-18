@@ -7,7 +7,7 @@ const fs = require("fs");
 const noteList = JSON.parse(fs.readFileSync("db/db.json"));
 // ROUTING
 
-module.exports = (app) => {
+// module.exports = (app) => {
   // => HTML GET Requests
   // Below code handles when users "visit" a page.
   // In each of the below cases the user is shown an HTML page of content
@@ -23,4 +23,6 @@ module.exports = (app) => {
   res.sendFile(path.join(__dirname, '../public/notes.html')));
 
 
-}
+// }
+
+module.exports = router; 
