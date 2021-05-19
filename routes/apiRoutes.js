@@ -42,15 +42,28 @@ app.post('/api/notes', (req, res) => {
 
 
   //delete note-------------------------
-  app.delete('/api/notes/:id', (req, res) => {
+  router.delete('/api/notes/:id', (req, res) => {
   //finds note by id, then converts the string into a JSON object with the id parameters of the request made
-  let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
-
-  //Delete object matching the index of the note ID
+  // let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
+  // const noteId = parseInt(req.params.id)
+  const noteList = JSON.parse(fs.readFileSync("db/db.json"));
+  const newArray = noteList.filter(note => note.id !== noteId);
+  
+  
   noteList.splice(noteList.indexOf(findNote), 1);
+  fs.writeFileSync("db/db.json", JSON.stringify(newArray));
+
+   res.json({ok: true});
+  //Delete object matching the index of the note ID
+
   res.end("Note was deleted");
 });
 
+
+
+
+
+// pushing to the DB-----------------------
 function writeToDB(notes){
   // Converts new JSON Array back to string
   notes = JSON.stringify(notes);
