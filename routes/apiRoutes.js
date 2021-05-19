@@ -2,16 +2,16 @@
 // We are linking our routes to a series of "data" sources.
 // These data sources hold arrays of information on table-data, waitinglist, etc.
 
-const tableData = require('../db/db.json');
+const notesData = require('../db/db.json');
 //connecting router to express
-const router = require('express').Router();
+// const router = require('express').Router();
 const fs = require("fs");
 const noteList = JSON.parse(fs.readFileSync("db/db.json"));
 
 
 
 
-router.get('/notes', (req, res) => {
+app.get('/notes', (req, res) => {
   const noteList = JSON.parse(fs.readFileSync("db/db.json"));
   return res.json(noteList);
 
@@ -23,7 +23,7 @@ router.get('/notes', (req, res) => {
 // ROUTING
 
 // module.exports = (app) => {
-routes.post('/api/notes', (req, res) => {
+app.post('/api/notes', (req, res) => {
   // res.json(tableData));
 
   const newNote = {
@@ -42,7 +42,7 @@ routes.post('/api/notes', (req, res) => {
 
 
   //delete note-------------------------
-  routes.delete('/api/notes/:id', (req, res) => {
+  app.delete('/api/notes/:id', (req, res) => {
   //finds note by id, then converts the string into a JSON object with the id parameters of the request made
   let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
 
@@ -51,4 +51,18 @@ routes.post('/api/notes', (req, res) => {
   res.end("Note was deleted");
 });
 
+function writeToDB(notes){
+  // Converts new JSON Array back to string
+  notes = JSON.stringify(notes);
+  console.log (notes);
+  // Writes String back to db.json
+  fs.writeFileSync("./db/db.json", notes, function(err){
+      if (err) {
+          return console.log(err);
+      }
+  // });
+
+});
+}
+  writeToDB(notesData);
 
