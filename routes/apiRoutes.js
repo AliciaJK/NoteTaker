@@ -4,7 +4,7 @@
 
 const notesData = require('../db/db.json');
 //connecting router to express
-// const router = require('express').Router();
+const router = require('express').Router();
 const fs = require("fs");
 const noteList = JSON.parse(fs.readFileSync("db/db.json"));
 
