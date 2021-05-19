@@ -44,7 +44,7 @@ app.post('/api/notes', (req, res) => {
   //delete note-------------------------
   router.delete('/api/notes/:id', (req, res) => {
   //finds note by id, then converts the string into a JSON object with the id parameters of the request made
-  // let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
+  let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
   // const noteId = parseInt(req.params.id)
   const noteList = JSON.parse(fs.readFileSync("db/db.json"));
   const newArray = noteList.filter(note => note.id !== noteId);
