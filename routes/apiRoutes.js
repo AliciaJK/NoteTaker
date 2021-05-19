@@ -59,7 +59,7 @@ app.post('/api/notes', (req, res) => {
   res.end("Note was deleted");
 });
 
-
+module.exports = router;
 
 
 
