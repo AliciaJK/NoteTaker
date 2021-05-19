@@ -14,35 +14,41 @@ const noteList = JSON.parse(fs.readFileSync("db/db.json"));
 router.get('/notes', (req, res) => {
   const noteList = JSON.parse(fs.readFileSync("db/db.json"));
   return res.json(noteList);
+
+
 });
 
 
 
 // ROUTING
 
-module.exports = (app) => {
+// module.exports = (app) => {
+routes.post('/api/notes', (req, res) => {
+  // res.json(tableData));
 
-  router.get('/api/notes', (req, res) => res.json(tableData));
+  const newNote = {
+    id: noteList[noteList.length - 1].id + 1,
+    title: req.body.title,
+    text: req.body.text,
+  };
 
+  console.log(newNote);
+  noteList.push(newNote);
+  fs.writeFileSync("db/db.json", JSON.stringify(noteList));
 
-  router.post('/api/notes', (req, res) => {
-    if (tableData.length < 5) {
-      tableData.push(req.body);
-      res.json(true);
-    } else {
-      waitListData.push(req.body);
-      res.json(false);
-    }
-  });
-
-  //delete note
-  router.delete('/api/notes/:id', (req, res) => {
-    //finds note by id, then converts the string into a JSON object with the id parameters of the request made
-    let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
-
-    //Delete object matching the index of the note ID
-    noteList.splice(noteList.indexOf(findNote), 1);
-    res.end("Note was deleted");
+  return res.json(noteList);
 });
-}
+
+
+
+  //delete note-------------------------
+  routes.delete('/api/notes/:id', (req, res) => {
+  //finds note by id, then converts the string into a JSON object with the id parameters of the request made
+  let findNote = noteList.find(({ id }) => id === JSON.parse(req.params.id));
+
+  //Delete object matching the index of the note ID
+  noteList.splice(noteList.indexOf(findNote), 1);
+  res.end("Note was deleted");
+});
+
 
