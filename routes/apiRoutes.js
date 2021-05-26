@@ -11,10 +11,10 @@ const noteList = JSON.parse(fs.readFileSync("db/db.json"));
 
 // pushing to the DB-----------------------
 function writeToDB(notes){
-  // Converts new JSON Array back to string
+
   notes = JSON.stringify(notes);
   console.log (notes);
-  // Writes String back to db.json
+
   fs.writeFileSync("./db/db.json", notes, function(err){
       if (err) {
           return console.log(err);
@@ -26,6 +26,7 @@ function writeToDB(notes){
   writeToDB(notesData);
 
 
+////get notes list 
 
 router.get('/notes', (req, res) => {
   const noteList = JSON.parse(fs.readFileSync("db/db.json"));
