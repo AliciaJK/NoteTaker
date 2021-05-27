@@ -1,7 +1,7 @@
 # NoteTaker
 Express js application
 
-https://sheltered-anchorage-83661.herokuapp.com/notes
+https://sheltered-anchorage-83661.herokuapp.com/
 
 # Project Description
 This tool is an application that allows you to take notes and save them. It also allows you to access those notes again via left navigation bar. 
